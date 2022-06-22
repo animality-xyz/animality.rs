@@ -19,7 +19,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("{}", fact.fact);
 
     Ok(());
-}
+};
 ```
 
 This outputs the following text in the terminal:
