@@ -18,7 +18,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("{}", result.link);
     println!("{}", result2.fact);
 
-    Ok(())
+    Ok(());
 }
 ```
 
