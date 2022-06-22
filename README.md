@@ -2,23 +2,21 @@
 A simple API wrapper that generates images & facts of any animal
 
 # Installation
-```toml
-[dependencies]
-tokio = { version = "1", features = ["full"] }
-animality = { version = "0.1.0" }
+```bash
+$ echo :tada:
 ```
 
 # Example
-We use [Tokio](https://tokio.rs) to help with the asynchronous runtime for Rust.
+We use [`tokio`](https://tokio.rs) to help with the asynchronous runtime for Rust.
 
 ```rust
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let animality = Animality::new("APIKEY");
-    let result = animality.fetch_random_image(String::from("dolphin")).await?;
-    let result2 = animality.fetch_fact(String::from("cat")).await?;
+    let animality = Animality::new("API_KEY");
+    let image = animality.fetch_random_image(String::from("capybara")).await?;
+    let fact = animality.fetch_fact(String::from("capybara")).await?;
 
-    println!("{}", result.link);
-    println!("{}", result2.fact);
+    println!("{}", image.link);
+    println!("{}", fact.fact);
 
     Ok(());
 }
