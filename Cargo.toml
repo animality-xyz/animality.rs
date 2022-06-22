@@ -1,5 +1,5 @@
 [package]
-name = "animality-rs"
+name = "animality"
 version = "0.1.0"
 edition = "2021"
 
