@@ -1,6 +1,11 @@
 # animality.rs
 A simple API wrapper that generates images & facts of any animal
 
+# Installation
+```bash
+$ echo :tada:
+```
+
 # Example
 We use [Tokio](https://tokio.rs) to help with the asynchronous runtime for Rust.
 
