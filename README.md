@@ -1,9 +1,10 @@
-# Animality.rs
-> Animality.rs is a rust wrapper for the [Animality](https://animality.xyz) api.
+# animality.rs
+A simple API wrapper that generates images & facts of any animal
+
 # Example
-> We use [tokio](https://tokio.rs) to help with the asynchronous runtime for Rust.
+We use [Tokio](https://tokio.rs) to help with the asynchronous runtime for Rust.
+
 ```rust
-#[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let animality = Animality::new("APIKEY");
     let result = animality.fetch_random_image(String::from("dolphin")).await?;
@@ -15,11 +16,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
-> Output:
+
+This outputs the following text in the terminal:
 
 ```json
 {
-  "link": "https://api.animality.xyz/images/dolphin/20.png",
-  "fact": "Black cats are bad luck in the United States, but they are good luck in the United Kingdom and Australia."
+  "link": "https://api.animality.xyz/images/capybara/20.png",
+  "fact": "Capybaras can make for good pets when kept in groups."
 }
 ```
