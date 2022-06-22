@@ -9,7 +9,7 @@ animality = { version = "0.1.0" }
 ```
 
 # Example
-We use [`tokio`](https://tokio.rs) to help with the asynchronous runtime for Rust.
+We use [Tokio](https://tokio.rs) to help with the asynchronous runtime for Rust.
 
 ```rust
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
