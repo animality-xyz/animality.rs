@@ -116,9 +116,8 @@ impl Animality {
       return Err(RequestError::ReadingResponse(err));
     }
     
-    let mut line_iterator = raw_response.lines();
-      
-    let mut first_line = line_iterator
+    let mut first_line = raw_response
+      .lines()
       .next()
       .expect("Cannot retrieve first line of HTTP response.")
       .split_whitespace()
