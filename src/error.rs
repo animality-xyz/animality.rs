@@ -155,7 +155,7 @@ pub enum RequestError {
   CreatingTcpStream(io::Error),
 
   /// Whenever [`native_tls::TlsConnector::connect`] fails.
-  ConnectingTcpStream(HandshakeError<TcpStream>),
+  Handshake(HandshakeError<TcpStream>),
 
   /// Whenever [`native_tls::TlsStream::write_all`] fails.
   WritingRequest(io::Error),
@@ -173,7 +173,7 @@ impl RequestError {
       Self::HttpError(err) => err,
       Self::CreatingTlsConnector(err) => err,
       Self::CreatingTcpStream(err) => err,
-      Self::ConnectingTcpStream(err) => err,
+      Self::Handshake(err) => err,
       Self::WritingRequest(err) => err,
       Self::ReadingResponse(err) => err,
       Self::ParsingJsonResponse(err) => err,

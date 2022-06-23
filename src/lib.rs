@@ -164,7 +164,7 @@ impl Animality {
     }?;
 
     let mut stream = match connector.connect("api.animality.xyz", stream) {
-      Err(err) => Err(RequestError::ConnectingTcpStream(err)),
+      Err(err) => Err(RequestError::Handshake(err)),
       Ok(s) => Ok(s),
     }?;
 
