@@ -20,6 +20,28 @@ impl Display for InvalidAnimalError {
   }
 }
 
+/// If the client receives an invalid HTTP status code, the error would be this.
+///
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```rust,norun
+/// extern crate animality;
+/// use animality::{Animality, Animal, RequestError};
+/// 
+/// let client = Animality::new("your user token");
+/// 
+/// let error = client.image(Animal::Dog).unwrap_err();
+/// 
+/// match error {
+///   RequestError::HttpError(http_err) => {
+///     eprintln!("Received {} - {}", http_err.status_code(), http_err.message());
+///   },
+/// 
+///   _ => eprintln!("Whoops! {}", error),
+/// }
+/// ```
 #[derive(Debug)]
 pub struct HttpError {
   inner_status_code: u16,
@@ -31,10 +53,54 @@ impl HttpError {
     Self { inner_status_code, inner_message }
   }
 
+  /// Retrieves the HTTP error status code.
+  /// 
+  /// # Examples
+  ///
+  /// Basic usage:
+  ///
+  /// ```rust,norun
+  /// extern crate animality;
+  /// use animality::{Animality, Animal, RequestError};
+  /// 
+  /// let client = Animality::new("your user token");
+  /// 
+  /// let error = client.image(Animal::Dog).unwrap_err();
+  /// 
+  /// match error {
+  ///   RequestError::HttpError(http_err) => {
+  ///     eprintln!("Received {}", http_err.status_code());
+  ///   },
+  /// 
+  ///   _ => eprintln!("Whoops! {}", error),
+  /// }
+  /// ```
   pub const fn status_code(&self) -> u16 {
     self.inner_status_code
   }
 
+  /// Retrieves the HTTP error status message.
+  /// 
+  /// # Examples
+  ///
+  /// Basic usage:
+  ///
+  /// ```rust,norun
+  /// extern crate animality;
+  /// use animality::{Animality, Animal, RequestError};
+  /// 
+  /// let client = Animality::new("your user token");
+  /// 
+  /// let error = client.image(Animal::Dog).unwrap_err();
+  /// 
+  /// match error {
+  ///   RequestError::HttpError(http_err) => {
+  ///     eprintln!("{}", http_err.message());
+  ///   },
+  /// 
+  ///   _ => eprintln!("Whoops! {}", error),
+  /// }
+  /// ```
   #[inline(always)]
   pub fn message(&self) -> &str {
     &self.inner_message
@@ -62,14 +128,42 @@ impl Into<u16> for HttpError {
   }
 }
 
+/// The error whenever the client fails to initiate a request (for various reasons)
+/// 
+/// # Examples
+///
+/// Basic usage:
+///
+/// ```rust,norun
+/// extern crate animality;
+/// use animality::{Animality, Animal};
+/// 
+/// let client = Animality::new("your user token");
+/// 
+/// let error = client.image(Animal::Dog).unwrap_err();
+/// eprintln!("error! {}", error);
+/// ```
 #[derive(Debug)]
 pub enum RequestError {
+  /// Whenever the client receives an invalid status code.
   HttpError(HttpError),
+
+  /// Whenever [`native_tls::TlsConnector::new`] fails.
   CreatingTlsConnector(native_tls::Error),
+
+  /// Whenever [`std::net::TcpStream::connect`] fails.
   CreatingTcpStream(io::Error),
+
+  /// Whenever [`native_tls::TlsConnector::connect`] fails.
   ConnectingTcpStream(HandshakeError<TcpStream>),
+
+  /// Whenever [`native_tls::TlsStream::write_all`] fails.
   WritingRequest(io::Error),
+  
+  /// Whenever [`native_tls::TlsStream::read_to_string`] fails.
   ReadingResponse(io::Error),
+
+  /// Whenever [`serde_json::from_str`] fails.
   ParsingJsonResponse(serde_json::Error),
 }
 
@@ -98,12 +192,5 @@ impl Display for RequestError {
   #[inline(always)]
   fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
     write!(f, "RequestError({})", self.inner())
-  }
-}
-
-impl Into<RequestError> for HttpError {
-  #[inline(always)]
-  fn into(self) -> RequestError {
-    RequestError::HttpError(self)
   }
 }

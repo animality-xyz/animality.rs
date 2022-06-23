@@ -1,13 +1,16 @@
 # animality.rs
-A simple API wrapper that generates images & facts of any animal
+
+A simple Rust API wrapper that generates images & facts of any animal.
 
 # Installation
+
 Add this to your `Cargo.toml file's dependencies:`
 ```toml
 animality = "1.0.0"
 ```
 
 # Blocking request
+
 ```rust
 extern crate animality;
 use animality::{Animality, Animal};
@@ -27,6 +30,7 @@ fn main() {
 ```
 
 # Async request
+
 ```rust
 extern crate animality;
 extern crate tokio;
