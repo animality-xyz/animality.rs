@@ -20,9 +20,9 @@ fn main() {
   let dog_fact = client.fact(Animal::Dog).unwrap();
   
   // request from a string (case-insensitive) 
-  let cat_text = "cat";
-  let cat_image = client.image(cat_text.parse()).unwrap();
-  let cat_fact = client.fact(cat_text.parse()).unwrap();
+  let cat: Animal = "cat".parse().unwrap();
+  let cat_image = client.image(cat).unwrap();
+  let cat_fact = client.fact(cat).unwrap();
 }
 ```
 
@@ -42,9 +42,9 @@ async fn main() -> Result<(), RequestError> {
   let dog_fact = client.fact_async(Animal::Dog).await?;
   
   // request from a string (case-insensitive) 
-  let cat_text = "cat";
-  let cat_image = client.image_async(cat_text.parse()).await?;
-  let cat_fact = client.fact_async(cat_text.parse()).await?;
+  let cat: Animal = "cat".parse().unwrap();
+  let cat_image = client.image_async(cat).await?;
+  let cat_fact = client.fact_async(cat).await?;
 
   Ok(())
 }

@@ -1,7 +1,8 @@
 use crate::InvalidAnimalError;
-use std::str::FromStr;
+use std::{str::FromStr, fmt::Display};
 
 #[repr(u8)]
+#[derive(Copy, Clone, Debug)]
 pub enum Animal {
   Cat,
   Dog,
@@ -78,6 +79,13 @@ impl FromStr for Animal {
   #[inline(always)]
   fn from_str(s: &str) -> Result<Self, Self::Err> {
     Self::from_str_impl(&s.to_lowercase())
+  }
+}
+
+impl Display for Animal {
+  #[inline(always)]
+  fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    write!(f, "Animal({})", self.as_str())
   }
 }
 
