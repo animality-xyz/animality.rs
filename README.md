@@ -1,4 +1,4 @@
-# animality.r
+# animality.rs
 A simple Rust API wrapper that generates images & facts of any animal.
 
 # Installation
