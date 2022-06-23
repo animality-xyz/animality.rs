@@ -13,7 +13,7 @@ extern crate animality;
 use animality::{Animality, Animal};
 
 fn main() {
-  let client = Animality::new("your token here");
+  let client = Animality::new("API_KEY");
   
   // request with the `Animal` enum
   let dog_image = client.image(Animal::Dog).unwrap();
@@ -35,7 +35,7 @@ use animality::{Animality, Animal, RequestError};
 
 #[tokio::main]
 async fn main() -> Result<(), RequestError> {
-  let client = Animality::new("your token here");
+  let client = Animality::new("API_KEY");
   
   // request with the `Animal` enum
   let dog_image = client.image_async(Animal::Dog).await?;
