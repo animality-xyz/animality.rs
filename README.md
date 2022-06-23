@@ -7,7 +7,7 @@ Add this to your `Cargo.toml file's dependencies:`
 animality = "1.0.0"
 ```
 
-# Blocking request
+# Blocking Request
 ```rust
 extern crate animality;
 use animality::{Animality, Animal};
@@ -26,7 +26,7 @@ fn main() {
 }
 ```
 
-# Async request
+# Async Request
 ```rust
 extern crate animality;
 extern crate tokio;
